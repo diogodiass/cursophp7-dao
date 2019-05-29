@@ -48,11 +48,11 @@ public function loadById($id){
 
     $sql = new Sql();
 
-    $result = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :ID", array(
+    $results = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :ID", array(
         ":ID"=>$id
     ));
 
-    if(isset($result[0])){
+    if(isset($results[0])){
         
         $this->setData($results[0]);
 
@@ -123,7 +123,22 @@ public function insert(){
     }
 }
 
-public function __construct($login, $password){
+public function update($login, $password){
+    $this->setDeslogin($login);
+    $this->setDesenha($password);
+
+    $sql = new Sql();
+
+    $sql->query("UPDATE tb_usuarios SET deslogin = :LOGIN, desenha = :PASSWORD WHERE idusuario = :ID", array(
+        ':LOGIN'=>$this->getDeslogin(),
+        ':PASSWORD'=>$this->getDesenha(),
+        ':ID'=>$this->getIdusuario()
+
+    ));
+}
+
+
+public function __construct($login="", $password=""){
 
     $this->setDeslogin($login);
     $this->setDesenha($password);

@@ -23,11 +23,19 @@ require_once("config.php");
 //$login->login("diogo","102030");
 //echo $login;
 
-$aluno = new Usuario("Diogo", "Diogo2018@");
+//Criando Usuario 
+//$aluno = new Usuario("Diogo", "Diogo2018@");
+//$aluno->insert();
+//echo $aluno;
 
-$aluno->insert();
+//Update Usuario
 
-echo $aluno;
+$usuario = new Usuario();
 
+$usuario->loadById(6);
+
+$usuario->update("Programador","Dev2019");
+
+echo $usuario;
 
 ?>
