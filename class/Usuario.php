@@ -52,7 +52,7 @@ public function loadById($id){
         ":ID"=>$id
     ));
 
-    if(count($result) > 0){
+    if(isset($result[0])){
         
         $row = $result[0];
 
@@ -62,6 +62,52 @@ public function loadById($id){
         $this->setDtcadastro(new DateTime($row['dtcadastro']));
 
     }
+}
+
+public static function getList(){
+
+    $sql = new Sql();
+
+    return $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin");
+
+}
+
+public static function search($login){
+
+    $sql = new Sql();
+
+    return $sql->select("SELECT * FROM tb_usuarios WHERE deslogin LIKE :SEARCH ORDER BY deslogin",array(
+        ':SEARCH'=>"%".$login."%"
+
+
+    ));
+
+}
+
+public function login ($login, $password){
+        $sql = new Sql();
+
+        $result = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND desenha = :PASSWORD", array(
+            ":LOGIN"=>$login,
+            ":PASSWORD"=>$password
+        ));
+
+        if(isset($result[0])){
+            
+            $row = $result[0];
+
+            $this->setIdusuario($row['idusuario']);
+            $this->setDeslogin($row['deslogin']);
+            $this->setDesenha($row['desenha']);
+            $this->setDtcadastro(new DateTime($row['dtcadastro']));
+
+    } else{
+
+        throw new Exception("Login e/ou senha invalidos");
+
+    }
+
+
 }
 
 public function __toString(){
