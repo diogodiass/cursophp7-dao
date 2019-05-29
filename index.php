@@ -30,11 +30,18 @@ require_once("config.php");
 
 //Update Usuario
 
+//$usuario = new Usuario();
+//$usuario->loadById(6);
+//$usuario->update("Programador","Dev2019");
+//echo $usuario;
+
+//Delete User
+
 $usuario = new Usuario();
 
 $usuario->loadById(6);
 
-$usuario->update("Programador","Dev2019");
+$usuario->delete();
 
 echo $usuario;
 
