@@ -19,10 +19,15 @@ require_once("config.php");
 
 //Busca por usuario 
 
-$login = new Usuario();
+//$login = new Usuario();
+//$login->login("diogo","102030");
+//echo $login;
 
-$login->login("diogo","102030");
+$aluno = new Usuario("Diogo", "Diogo2018@");
 
-echo $login;
+$aluno->insert();
+
+echo $aluno;
+
 
 ?>
